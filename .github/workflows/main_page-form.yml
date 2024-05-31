@@ -29,9 +29,7 @@ jobs:
           npm run test --if-present
 
       - name: Zip artifact for deployment
-        run: |
-          mv .next/static .next/standalone/.next/static
-          zip -r release.zip .next/standalone/
+        run: zip -r release.zip .next/standalone/
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -71,3 +69,10 @@ jobs:
           app-name: 'page-form'
           slot-name: 'Production'
           package: .
+        env:
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+          NEXT_PUBLIC_CLERK_SIGN_IN_URL: ${{ secrets.NEXT_PUBLIC_CLERK_SIGN_IN_URL }}
+          NEXT_PUBLIC_CLERK_SIGN_UP_URL: ${{ secrets.NEXT_PUBLIC_CLERK_SIGN_UP_URL }}
+          POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
+          POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
