@@ -8,13 +8,14 @@ on:
     branches:
       - main
   workflow_dispatch:
-
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
@@ -28,7 +29,9 @@ jobs:
           npm run test --if-present
 
       - name: Zip artifact for deployment
-        run: zip release.zip .next/standalone/* -r
+        run: |
+          mv .next/static .next/standalone/.next/static
+          zip release.zip ./* .next -qr
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
