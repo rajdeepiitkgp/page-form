@@ -11,7 +11,6 @@ export const GetFormStats = async () => {
   if (!user) {
     throw new UserNotFoundErr();
   }
-
   const stats = await prisma.form.aggregate({
     where: {
       userId: user.id,
