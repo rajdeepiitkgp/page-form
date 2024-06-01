@@ -55,12 +55,12 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1FC8ED9ECE5E4ABEB25E060D0BEBF18B }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_338F2FEFF08E422EB68FB2E1D4D72ED8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_97A878A3C4C0465BB43463FA5BF96332 }}
+      # - name: Login to Azure
+      #   uses: azure/login@v1
+      #   with:
+      #     client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1FC8ED9ECE5E4ABEB25E060D0BEBF18B }}
+      #     tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_338F2FEFF08E422EB68FB2E1D4D72ED8 }}
+      #     subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_97A878A3C4C0465BB43463FA5BF96332 }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -69,6 +69,7 @@ jobs:
           app-name: 'Dynamic-Form-Azure'
           slot-name: 'Production'
           package: .
+          publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
