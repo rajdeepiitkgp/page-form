@@ -6,7 +6,7 @@ name: Build and deploy Next.js app to Azure Web App - page-form Dynamic-Form-Azu
 on:
   push:
     branches:
-      - main
+      - main2
   workflow_dispatch:
 jobs:
   build:
