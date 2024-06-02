@@ -52,7 +52,7 @@ const DesignerComponent = ({
     <div className='flex flex-col gap-2 w-full'>
       <Label>
         {label}
-        {required && '*'}
+        {required && <span className='text-destructive'>*</span>}
       </Label>
       <Input readOnly disabled placeholder={placeholder} />
       {helperText && (
@@ -167,10 +167,8 @@ const PropertiesComponent = ({
             <FormItem className='flex items-center justify-between rounded-lg border p-3 shadow-sm'>
               <div className='space-y-0.5'>
                 <FormLabel>Required</FormLabel>
-
                 <FormDescription>
-                  The helper text of the Field. <br /> It will be displayed
-                  below the field
+                  Does the response of this field needs to be required?
                 </FormDescription>
               </div>
               <FormControl>
@@ -187,6 +185,26 @@ const PropertiesComponent = ({
     </Form>
   );
 };
+const FormComponent = ({
+  elementInstance,
+}: {
+  elementInstance: FormElementInstance;
+}) => {
+  const element = elementInstance as CustomInstance;
+  const { label, required, helperText, placeholder } = element.extraAttributes;
+  return (
+    <div className='flex flex-col gap-2 w-full'>
+      <Label>
+        {label}
+        {required && <span className='text-destructive'>*</span>}
+      </Label>
+      <Input placeholder={placeholder} />
+      {helperText && (
+        <p className='text-muted-foreground text-[0.8rem]'>{helperText}</p>
+      )}
+    </div>
+  );
+};
 
 export const TextFieldFormElement: FormElement = {
   type,
@@ -200,7 +218,7 @@ export const TextFieldFormElement: FormElement = {
     label: 'Text Field',
   },
   designerComponent: DesignerComponent,
-  formComponent: () => <div>Form Component</div>,
+  formComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
 };
 
