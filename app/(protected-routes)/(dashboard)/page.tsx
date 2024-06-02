@@ -108,7 +108,7 @@ interface StatsCardItemProp {
   className: string;
 }
 
-const StatsCard = ({
+export const StatsCard = ({
   title,
   icon,
   helperText,
