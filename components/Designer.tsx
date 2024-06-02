@@ -224,11 +224,11 @@ const DesignerElementWrapper = ({
           mouseIsOver && 'opacity-30'
         )}
       >
-        {bottomHalf.isOver && (
-          <div className='absolute bottom-0 w-full rounded-md h-[7px] bg-primary rounded-t-none' />
-        )}
         <DesignerElement elementInstance={element} />
       </div>
+      {bottomHalf.isOver && (
+        <div className='absolute bottom-0 w-full rounded-md h-[7px] bg-primary rounded-t-none' />
+      )}
     </div>
   );
 };
