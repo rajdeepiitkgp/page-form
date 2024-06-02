@@ -28,7 +28,7 @@ import { cn } from '@/lib/utils';
 
 const type: ElementsType = 'TextField';
 const extraAttributes = {
-  label: 'Text field',
+  label: 'Text Field',
   helperText: 'Helper Text',
   required: false,
   placeholder: 'Value here...',
@@ -120,7 +120,7 @@ const PropertiesComponent = ({
               <FormMessage />
             </FormItem>
           )}
-        ></FormField>
+        />
         <FormField
           control={form.control}
           name='placeholder'
@@ -139,7 +139,7 @@ const PropertiesComponent = ({
               <FormMessage />
             </FormItem>
           )}
-        ></FormField>
+        />
         <FormField
           control={form.control}
           name='helperText'
@@ -161,7 +161,7 @@ const PropertiesComponent = ({
               <FormMessage />
             </FormItem>
           )}
-        ></FormField>
+        />
         <FormField
           control={form.control}
           name='required'
@@ -182,7 +182,7 @@ const PropertiesComponent = ({
               <FormMessage />
             </FormItem>
           )}
-        ></FormField>
+        />
       </form>
     </Form>
   );
