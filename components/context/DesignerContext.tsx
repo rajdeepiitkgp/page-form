@@ -12,6 +12,7 @@ import { FormElementInstance } from '../FormElements';
 type DesignerContextType = {
   elements: FormElementInstance[];
   addElement: (index: number, element: FormElementInstance) => void;
+  setElements: Dispatch<SetStateAction<FormElementInstance[]>>;
   removeElement: (id: string) => void;
   selectedElement: FormElementInstance | null;
   setSelectedElement: Dispatch<SetStateAction<FormElementInstance | null>>;
@@ -49,6 +50,7 @@ const DesignerContextProvider = ({ children }: { children: ReactNode }) => {
     <DesignerContext.Provider
       value={{
         elements,
+        setElements,
         addElement,
         removeElement,
         selectedElement,
