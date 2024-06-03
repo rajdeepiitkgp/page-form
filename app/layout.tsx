@@ -22,7 +22,7 @@ const RootLayout = ({
   <ClerkProvider>
     <html lang='en'>
       <body className={inter.className}>
-        <NextTopLoader />
+        <NextTopLoader showSpinner={false} />
         <DesignerContextProvider>
           <ThemeProvider
             attribute='class'
