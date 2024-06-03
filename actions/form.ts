@@ -1,10 +1,9 @@
 'use server';
 
+import { EmptyFormErr, UserNotFoundErr } from '@/Errors/ErrorTypes';
 import prisma from '@/lib/prisma';
 import { formSchema, formSchemaType } from '@/schemas/form';
 import { currentUser } from '@clerk/nextjs/server';
-
-class UserNotFoundErr extends Error {}
 
 export const GetFormStats = async () => {
   const user = await currentUser();
@@ -103,6 +102,10 @@ export const PublishForm = async (id: number) => {
     throw new UserNotFoundErr();
   }
 
+  const currentForm = await GetFormById(id);
+  if (!currentForm) throw new Error('Form not found');
+  const { content } = currentForm;
+  if (!content || content === '[]') throw new EmptyFormErr();
   return await prisma.form.update({
     data: {
       published: true,
@@ -165,3 +168,4 @@ export const GetFormWithSubmissions = async (id: number) => {
     },
   });
 };
+

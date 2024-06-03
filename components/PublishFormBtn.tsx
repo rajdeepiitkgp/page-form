@@ -16,12 +16,23 @@ import { useTransition } from 'react';
 import { toast } from './ui/use-toast';
 import { PublishForm } from '@/actions/form';
 import { useRouter } from 'next/navigation';
+import useDesigner from './hooks/useDesigner';
 
 const PublishFormBtn = ({ id }: { id: number }) => {
+  const { elements } = useDesigner();
   const [loading, startTransition] = useTransition();
   const router = useRouter();
   const publishForm = async () => {
     try {
+      if (elements.length === 0) {
+        toast({
+          title: 'Empty Form',
+          description:
+            'Please populate the form and Save the Form Before publishing',
+          variant: 'destructive',
+        });
+        return;
+      }
       await PublishForm(id);
       toast({
         title: 'Success',
